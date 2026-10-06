@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --font-display: Syne, sans-serif;
+  --font-body: Inter, sans-serif;
+
+  --color-dark: #0a0a0a;
+  --color-light: #fafafa;
+  
+  --color-accent-teal: #14b8a6;
+  --color-accent-indigo: #6366f1;
+
+  --animate-gradient-x: gradient-x 15s ease infinite;
+  --animate-gradient-y: gradient-y 15s ease infinite;
+  --animate-gradient-xy: gradient-xy 15s ease infinite;
+}
+
+@keyframes gradient-y {
+  0%, 100% {
+    background-size: 400% 400%;
+    background-position: center top;
+  }
+  50% {
+    background-size: 200% 200%;
+    background-position: center center;
+  }
+}
+
+@keyframes gradient-x {
+  0%, 100% {
+    background-size: 200% 200%;
+    background-position: left center;
+  }
+  50% {
+    background-size: 200% 200%;
+    background-position: right center;
+  }
+}
+
+@keyframes gradient-xy {
+  0%, 100% {
+    background-size: 400% 400%;
+    background-position: left center;
+  }
+  50% {
+    background-size: 200% 200%;
+    background-position: right center;
+  }
+}
+
+@layer base {
+  body {
+    @apply text-dark bg-light dark:text-light dark:bg-dark;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-light dark:bg-dark;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 dark:bg-gray-800 rounded-full;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-accent-teal dark:bg-accent-teal;
+}
+
+/* Hide default cursor on desktop for custom cursor */
+@media (pointer: fine) {
+  body.custom-cursor-enabled {
+    cursor: none;
+  }
+  body.custom-cursor-enabled * {
+    cursor: none !important;
+  }
+}
+
+/* Utility to override custom cursor hiding inside iframe or specifically needed elements */
+.no-custom-cursor {
+  cursor: auto !important;
+}
